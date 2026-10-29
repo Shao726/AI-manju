@@ -1,3 +1,11 @@
+# AI-manju
+
+ai漫剧的开发
+
+This project starts from [StoryBored](https://github.com/storybored-app/storybored),
+baseline commit `b368140dec0ccb43276b375afa887b2688027b0c`.
+The original MIT license and upstream documentation are preserved below.
+
 <p align="center">
   <img src="assets/brand/icon.svg" alt="StoryBored icon" width="96" />
 </p>
