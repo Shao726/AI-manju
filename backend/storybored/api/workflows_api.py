@@ -40,7 +40,7 @@ router = APIRouter(prefix="/api", tags=["workflows"])
 #: how many recent finished jobs per engine feed the speed median
 TIMING_WINDOW = 20
 #: render-shaped job types whose duration reflects one engine's speed
-TIMING_JOB_TYPES = ("image_gen", "video_gen", "character_thumb")
+TIMING_JOB_TYPES = ("image_gen", "video_gen", "r2v_gen", "character_thumb")
 
 
 def measured_render_timings(session: Session) -> dict[str, tuple[float, int]]:

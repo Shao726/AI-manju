@@ -8,6 +8,7 @@ export type JobStatus = "queued" | "running" | "done" | "failed" | "cancelled";
 export type JobType =
   | "image_gen"
   | "video_gen"
+  | "r2v_gen"
   | "animatic"
   | "dataset_prep"
   | "lora_train"

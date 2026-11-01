@@ -35,6 +35,7 @@ JOB_FAMILY: dict[str, str] = {
     "image_gen": "image",
     "character_thumb": "image",
     "video_gen": "video",
+    "r2v_gen": "video",
     # compare.py renders its test shots through the image engine
     "lora_shootout": "image",
 }

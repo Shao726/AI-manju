@@ -19,6 +19,7 @@ from storybored.api import (
     lifecycle,
     media,
     projects,
+    r2v,
     render,
     scenes,
     settings_api,
@@ -39,6 +40,7 @@ log = logging.getLogger("storybored")
 HANDLER_MODULES = [
     "storybored.engine.download",
     "storybored.engine.image",
+    "storybored.engine.r2v",
     "storybored.engine.video",
     "storybored.export.animatic",
     "storybored.export.archive",
@@ -89,6 +91,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         breakdown,
         enhance,
         render,
+        r2v,
         lifecycle,
         settings_api,
         workflows_api,

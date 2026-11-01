@@ -34,6 +34,8 @@ export function jobTypeLabel(t: Job["type"]): string {
       return "Rendering portrait";
     case "video_gen":
       return "Rendering video";
+    case "r2v_gen":
+      return "Rendering reference video";
     case "animatic":
       return "Exporting animatic";
     case "dataset_prep":
@@ -112,7 +114,7 @@ export function activeVideoJob(
   shotId: number,
 ): Job | undefined {
   return (jobs ?? []).find((j) => {
-    if (j.type !== "video_gen") return false;
+    if (j.type !== "video_gen" && j.type !== "r2v_gen") return false;
     if (j.status !== "queued" && j.status !== "running") return false;
     try {
       return JSON.parse(j.payload_json || "{}").shot_id === shotId;
