@@ -225,6 +225,7 @@ Agreement:
 | File | Folder | Size | Source |
 | --- | --- | --- | --- |
 | `minimax_h3_fl2va_pruned_nvfp4.safetensors` | `diffusion_models` | 12.5 GB | community NVFP4 repo (verified, see note) |
+| `minimax_h3_ref2va_pruned_int8_convrot.safetensors` | `diffusion_models` | 21.0 GB | Comfy-Org/MiniMax-H3 |
 | `qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors` | `text_encoders` | 15.7 GB | Comfy-Org/MiniMax-H3 |
 | `minimax_h3_video_vae_fp16.safetensors` | `vae` | 5.2 GB | Comfy-Org/MiniMax-H3 |
 | `minimax_h3_audio_vae_fp32.safetensors` | `vae` | 605 MB | Comfy-Org/MiniMax-H3 |

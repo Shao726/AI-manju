@@ -32,6 +32,14 @@
     "folder": "diffusion_models",
     "notes": "NVFP4 quantization of the pruned MiniMax H3 video model. This exact file lives in community NVFP4 repos (several byte-identical mirrors exist), NOT in the official Comfy-Org/MiniMax-H3 repo, which ships bf16 / fp8_scaled / int8_convrot variants under different filenames. Prefer a quantized build like this one: an unquantized ~26GB+ bf16 UNET offloads heavily on a 24 GB card."
   },
+  "minimax_h3_ref2va_pruned_int8_convrot.safetensors": {
+    "source": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+    "page": "https://huggingface.co/Comfy-Org/MiniMax-H3",
+    "size_bytes": 20970379616,
+    "license": "MiniMax H3 Community License Agreement",
+    "folder": "diffusion_models",
+    "notes": "Pruned int8 convolution-rotated MiniMax H3 ref2va model for reference-to-video. Use this instead of the fl2va model when conditioning on <Picture N> reference images."
+  },
   "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors": {
     "source": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
     "page": "https://huggingface.co/Comfy-Org/MiniMax-H3",
