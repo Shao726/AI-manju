@@ -52,7 +52,10 @@ DRAFT_SCHEMA = json.dumps(
             {
                 "title": "short scene title",
                 "slugline": "INT./EXT. LOCATION - DAY/NIGHT",
-                "look": "the scene's visual environment in one sentence: place, light, weather, palette",
+                "look": (
+                    "the scene's visual environment in one sentence: "
+                    "place, light, weather, palette"
+                ),
                 "shots": [
                     {
                         "description": "what the camera sees, one or two sentences",

@@ -13,7 +13,10 @@ VALID_DRAFT = {
         {
             "title": "Lamp Room",
             "slugline": "INT. LIGHTHOUSE LAMP ROOM - NIGHT",
-            "look": "cramped iron lamp room at night, one dead bulb, moonlight through salt-hazed glass",
+            "look": (
+                "cramped iron lamp room at night, one dead bulb, "
+                "moonlight through salt-hazed glass"
+            ),
             "shots": [
                 {
                     "description": "Wide of the lamp room, @ava silhouetted at the glass.",

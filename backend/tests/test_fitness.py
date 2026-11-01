@@ -1,7 +1,6 @@
 # OWNED-BY: engine-agent
 """Hardware fit + measured speed: unit rules and the /api/workflows surface."""
 
-import json
 import time
 
 import pytest

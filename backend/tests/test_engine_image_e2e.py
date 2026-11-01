@@ -334,8 +334,11 @@ HERO_PORTRAIT = (
 )
 
 
-def test_character_thumbnail_bio_drives_prompt_via_llm(  # noqa: F811
-    client, app, settings, fake_comfy
+def test_character_thumbnail_bio_drives_prompt_via_llm(
+    client,
+    app,
+    settings,
+    fake_comfy,  # noqa: F811
 ):
     from fake_llm import FakeLLM
 
@@ -373,8 +376,10 @@ def test_character_thumbnail_bio_drives_prompt_via_llm(  # noqa: F811
         llm.stop()
 
 
-def test_character_thumbnail_bio_falls_back_when_llm_unconfigured(  # noqa: F811
-    client, settings, fake_comfy
+def test_character_thumbnail_bio_falls_back_when_llm_unconfigured(
+    client,
+    settings,
+    fake_comfy,  # noqa: F811
 ):
     hero = make_hero(client)
     client.patch(f"/api/characters/{hero['id']}", json={"bio": HERO_BIO})
@@ -391,8 +396,10 @@ def test_character_thumbnail_bio_falls_back_when_llm_unconfigured(  # noqa: F811
     assert graph["6"]["inputs"]["text"].startswith("portrait photograph of zxqhero woman")
 
 
-def test_character_thumbnail_bio_falls_back_when_handle_dropped(  # noqa: F811
-    client, settings, fake_comfy
+def test_character_thumbnail_bio_falls_back_when_handle_dropped(
+    client,
+    settings,
+    fake_comfy,  # noqa: F811
 ):
     from fake_llm import FakeLLM
 
@@ -583,7 +590,10 @@ def test_continuity_skips_when_look_already_in_prompt(client, fake_comfy):  # no
 
 
 def _first_done_take(client, shot_id):
-    r = client.post(f"/api/shots/{shot_id}/generate", json={"workflow_id": "krea2-basic", "n_takes": 1})
+    r = client.post(
+        f"/api/shots/{shot_id}/generate",
+        json={"workflow_id": "krea2-basic", "n_takes": 1},
+    )
     job = wait_job(client, r.json()["job_id"])
     assert job["status"] == "done", job
     return client.get(f"/api/shots/{shot_id}/takes").json()[0]
@@ -599,7 +609,10 @@ def test_scene_plate_anchors_render(client, fake_comfy):  # noqa: F811
     r = client.patch(f"/api/shots/{shot['id']}", json={"plate_hold": "medium"})
     assert r.status_code == 200
 
-    r = client.post(f"/api/shots/{shot['id']}/generate", json={"workflow_id": "krea2-basic", "n_takes": 1})
+    r = client.post(
+        f"/api/shots/{shot['id']}/generate",
+        json={"workflow_id": "krea2-basic", "n_takes": 1},
+    )
     job = wait_job(client, r.json()["job_id"])
     assert job["status"] == "done", job
 
@@ -623,7 +636,10 @@ def test_scene_plate_off_without_hold_or_continuity(client, fake_comfy):  # noqa
     client.patch(f"/api/scenes/{scene['id']}", json={"plate_take_id": plate["id"]})
 
     # hold unset → plate untouched
-    r = client.post(f"/api/shots/{shot['id']}/generate", json={"workflow_id": "krea2-basic", "n_takes": 1})
+    r = client.post(
+        f"/api/shots/{shot['id']}/generate",
+        json={"workflow_id": "krea2-basic", "n_takes": 1},
+    )
     job = wait_job(client, r.json()["job_id"])
     assert job["status"] == "done", job
     graph = fake_comfy.state.prompts[fake_comfy.state.order[-1]]
@@ -633,7 +649,10 @@ def test_scene_plate_off_without_hold_or_continuity(client, fake_comfy):  # noqa
     # continuity off → plate untouched even with hold set
     client.patch(f"/api/shots/{shot['id']}", json={"plate_hold": "tight"})
     client.patch(f"/api/projects/{project['id']}", json={"continuity_enabled": False})
-    r = client.post(f"/api/shots/{shot['id']}/generate", json={"workflow_id": "krea2-basic", "n_takes": 1})
+    r = client.post(
+        f"/api/shots/{shot['id']}/generate",
+        json={"workflow_id": "krea2-basic", "n_takes": 1},
+    )
     job = wait_job(client, r.json()["job_id"])
     assert job["status"] == "done", job
     graph = fake_comfy.state.prompts[fake_comfy.state.order[-1]]
