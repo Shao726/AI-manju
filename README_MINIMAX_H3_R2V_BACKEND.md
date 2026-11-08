@@ -31,6 +31,81 @@ v1 不包含：
 
 ## 2. 对外接口
 
+### 2.1 地址约定
+
+StoryBored 后端默认监听：
+
+```text
+http://127.0.0.1:8600
+```
+
+部署到远程服务器后，地址由部署方式决定：
+
+```text
+局域网：http://<backend-host>:8600
+HTTPS：https://<api-domain>
+反向代理子路径：https://<domain>/<prefix>
+```
+
+下文统一使用：
+
+```text
+BASE_URL=https://<api-domain>
+```
+
+如果没有反向代理、直接使用端口：
+
+```text
+BASE_URL=http://<backend-host>:8600
+```
+
+所有业务接口都拼接在 `BASE_URL` 后面，并以 `/api` 开头。
+
+注意区分：
+
+- 浏览器调用的是 `BASE_URL` 对应的 StoryBored 后端。
+- 后端内部调用的是 `COMFYUI_URL` 对应的 ComfyUI。
+
+### 2.2 完整接口地址
+
+| 用途 | 方法 | 完整地址 |
+| --- | --- | --- |
+| 创建 R2V 渲染任务 | `POST` | `{BASE_URL}/api/shots/{shot_id}/render-r2v` |
+| 查询任务 | `GET` | `{BASE_URL}/api/jobs/{job_id}` |
+| 取消任务 | `POST` | `{BASE_URL}/api/jobs/{job_id}/cancel` |
+| 订阅任务事件 | `GET` | `{BASE_URL}/api/events` |
+| 获取生成视频 | `GET` | `{BASE_URL}/api/media/media/{project_id}/{shot_id}/take_{take_id}.mp4` |
+
+例如后端直接部署在 `http://192.168.1.50:8600`：
+
+```text
+POST http://192.168.1.50:8600/api/shots/48/render-r2v
+```
+
+例如后端通过 Nginx 暴露为 `https://api.example.com`：
+
+```text
+POST https://api.example.com/api/shots/48/render-r2v
+```
+
+ComfyUI 地址是后端配置项，不是浏览器接口：
+
+```env
+COMFYUI_URL=http://127.0.0.1:8188
+```
+
+后端实际调用：
+
+```text
+{COMFYUI_URL}/upload/image
+{COMFYUI_URL}/prompt
+{COMFYUI_URL}/history/{prompt_id}
+{COMFYUI_URL}/view
+{COMFYUI_URL}/object_info
+```
+
+### 2.3 创建 R2V 渲染任务
+
 ### `POST /api/shots/{shot_id}/render-r2v`
 
 返回 `202 Accepted`。
@@ -58,7 +133,9 @@ reference_images[2] -> <Picture 3>
 ### 请求示例
 
 ```bash
-curl -X POST "http://127.0.0.1:8600/api/shots/48/render-r2v" \
+BASE_URL="http://192.168.1.50:8600"
+
+curl -X POST "$BASE_URL/api/shots/48/render-r2v" \
   -F "reference_images=@hero.png" \
   -F "reference_images=@costume.png" \
   -F "prompt=<Picture 1> wears the outfit from <Picture 2> and walks through a rain-soaked alley. Audio: rain, footsteps, distant traffic." \
